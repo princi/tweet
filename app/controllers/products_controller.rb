@@ -70,6 +70,10 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :rating, :user_id)
+      params.require(:product).permit(:name, :price, :rating, :user_id, :photo)
     end
+
+     def authorize
+    redirect_to login_url,alert: "Not authorized" if current_user.blank?
+     end
 end

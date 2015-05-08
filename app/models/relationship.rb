@@ -1,3 +1,6 @@
+class Relationship < ActiveRecord::Base
+end
+
 # == Schema Information
 #
 # Table name: relationships
@@ -8,6 +11,3 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-class Relationship < ActiveRecord::Base
-end
