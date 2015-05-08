@@ -1,0 +1,45 @@
+<div id="products" class="panel left">
+  <h1> Product Profile
+  <%= link_to("(edit profile)", edit_user_path(@user)) if @user == current_user %>
+  </h1>
+
+  <div class="productWrapper">
+    <span class="name"><%= @user.name %></span> @<%= @user.username %>
+    <p>
+
+      <%= @user.products.length %> Products
+      <span class="spacing"> <%= @user.rates.length %> Rating </span>
+      <span class="spacing"> <%= @user.unrates.length %> Unrating </span>
+      <% if current_user && @user != current_user %>
+        <% if current_user.rating? @user %>
+          <%= form_for @relationship, method: :delete do |f| %>
+              <%= f.submit "Unrate" %>
+          <% end %>
+        <% else %>
+          <%= form_for @relationship do |f| %>
+            <%= f.hidden_field :unrate_id, value: @user.id %>
+            <%= f.submit "Rate" %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      </p>
+  </div>
+</div>
+
+<div class="panel left">
+    <h1> Products <h1>
+      <% @user.products.each do |product| %>
+      <div class="productWrapper">
+            <span class="name"> <%= product.user.name %> </span>
+
+          @<%= product.user.username %>
+          <span class="time"><%=time_ago_in_words(product.created_at) %></span>
+          <p> <%= product.content %></p>
+
+      </div>
+    <% end %>
+
+
+</div>
+
